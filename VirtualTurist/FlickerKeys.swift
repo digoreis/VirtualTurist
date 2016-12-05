@@ -9,5 +9,5 @@
 import Foundation
 
 struct FlickerKeys {
-    static let key = "628e5c0663b8e5911d2583b323e8d48e"
+    static let key = "adc47ac077889395f9fa3a8150ae9aa2"
 }

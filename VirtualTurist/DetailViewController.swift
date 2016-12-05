@@ -35,10 +35,9 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? PhotoCollectionViewCell ?? PhotoCollectionViewCell()
+        cell.image.image = UIImage(named : "default-placeholder")
         if indexPath.row < (pin?.photos?.count ?? 0), let photo = pin?.photos?.allObjects[indexPath.row] as? Photo, let data = photo.data {
             cell.image.image = UIImage(data: data)
-        } else {
-            cell.image.image = UIImage(named : "map")
         }
         return cell
     }
