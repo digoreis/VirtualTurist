@@ -38,10 +38,30 @@ struct FlickerAPI {
                 callback(result.images)
             }
             task.resume()
-        } else {
-            
-        }
+        } 
 
+    }
+    
+    static func newImages(pin : Pin) {
+        let size = 10 - (pin.photos?.count ?? 0)
+        if let url = URL(string: "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(FlickerKeys.key)&per_page=10&extras=url_m&lat=\(pin.lat)&lon=\(pin.lng)&format=json&nojsoncallback=1&per_page=\(size)") {
+            let request = URLRequest(url: url)
+            let session = URLSession.shared
+            print(CUrl(session: session, request: request).cURLRepresentation())
+            let task = session.dataTask(with: request) { data, response, error in
+                guard error == nil, let data = data else { return }
+                var json : NSDictionary? = nil
+                json <<< data
+                guard let jsonToParse = json?.object(forKey: "photos") as? NSDictionary, json?["error"] == nil else { return }
+                let result = Result(json: jsonToParse)
+                result.images?.forEach { image in
+                    guard (pin.photos?.count ?? 0) <= 10 else { return }
+                    downloadImage(pin : pin, path: image.imagePath!)
+                }
+            }
+            task.resume()
+        }
+        
     }
     
     static func downloadImage(pin : Pin, path : String) {

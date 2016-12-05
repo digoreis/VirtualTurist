@@ -24,7 +24,7 @@ final class MainViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         mapView.removeAnnotations(mapView.annotations)
         let pins = fetchAllPins()
         pins.forEach { pin in

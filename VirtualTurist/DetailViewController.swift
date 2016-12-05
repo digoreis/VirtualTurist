@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, UICollectionViewDataSource {
+class DetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -29,35 +29,41 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pin?.photos?.count ?? 0
+        return 10
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? PhotoCollectionViewCell ?? PhotoCollectionViewCell()
-        if let photo = pin?.photos?.allObjects[indexPath.row] as? Photo, let data = photo.data {
+        if indexPath.row < (pin?.photos?.count ?? 0), let photo = pin?.photos?.allObjects[indexPath.row] as? Photo, let data = photo.data {
             cell.image.image = UIImage(data: data)
+        } else {
+            cell.image.image = UIImage(named : "map")
         }
         return cell
     }
     
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let photo = pin?.photos?.allObjects[indexPath.row] as? Photo {
+            pin?.removeFromPhotos(photo)
+        }
     }
 
     
     @IBAction func deletePin(_ sender: Any) {
         if let app = UIApplication.shared.delegate as? AppDelegate, let pin = pin {
             app.stack.context.delete(pin)
-            self.close(self)
+            close(self)
         }
     }
     
-    
+    @IBAction func newImages(_ sender: Any) {
+        guard let pin = self.pin else { return }
+        FlickerAPI.newImages(pin : pin)
+    }
 
     @IBAction func close(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IzA-x0-Ehb">
-                                <rect key="frame" x="26" y="40" width="323" height="459"/>
+                                <rect key="frame" x="26" y="40" width="323" height="402"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tPs-SD-Hke">
                                     <size key="itemSize" width="105" height="109"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -94,7 +94,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEe-Xs-onP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="gEe-Xs-onP">
                                                     <rect key="frame" x="8" y="0.0" width="89" height="109"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -107,6 +107,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="8p7-uC-AMw" id="WDJ-ZV-oea"/>
+                                    <outlet property="delegate" destination="8p7-uC-AMw" id="bH2-vV-wBs"/>
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xm3-NW-mjd">
@@ -129,19 +130,30 @@
                                     <action selector="deletePin:" destination="8p7-uC-AMw" eventType="touchUpInside" id="c9I-HQ-Puc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVO-H1-5Ws">
+                                <rect key="frame" x="36" y="469" width="303" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Download Photos"/>
+                                <connections>
+                                    <action selector="newImages:" destination="8p7-uC-AMw" eventType="touchUpInside" id="jIn-gp-uYy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="0.40266481160000001" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="bVO-H1-5Ws" firstAttribute="leading" secondItem="HJV-Ao-VGQ" secondAttribute="leadingMargin" constant="20" id="0RM-Vi-zlu"/>
                             <constraint firstItem="IzA-x0-Ehb" firstAttribute="top" secondItem="0cu-kQ-0Ic" secondAttribute="bottom" constant="20" id="FrE-Hp-5Kg"/>
                             <constraint firstItem="xm3-NW-mjd" firstAttribute="top" secondItem="7st-a5-gLj" secondAttribute="bottom" constant="58" id="Ig0-D2-iOe"/>
+                            <constraint firstItem="7st-a5-gLj" firstAttribute="top" secondItem="bVO-H1-5Ws" secondAttribute="bottom" constant="20" id="JQN-zN-es6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7st-a5-gLj" secondAttribute="trailing" constant="20" id="KUF-Qc-yh5"/>
                             <constraint firstItem="7st-a5-gLj" firstAttribute="leading" secondItem="HJV-Ao-VGQ" secondAttribute="leadingMargin" constant="20" id="LNA-Uv-4bu"/>
                             <constraint firstItem="7st-a5-gLj" firstAttribute="trailing" secondItem="xm3-NW-mjd" secondAttribute="trailing" id="ZGV-Gh-p1Q"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IzA-x0-Ehb" secondAttribute="trailing" constant="10" id="ctR-u9-HNm"/>
                             <constraint firstAttribute="bottom" secondItem="7st-a5-gLj" secondAttribute="bottom" constant="118" id="ieM-kz-qxV"/>
                             <constraint firstItem="IzA-x0-Ehb" firstAttribute="leading" secondItem="HJV-Ao-VGQ" secondAttribute="leadingMargin" constant="10" id="jDn-li-5Df"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bVO-H1-5Ws" secondAttribute="trailing" constant="20" id="jaz-WC-TvT"/>
                             <constraint firstItem="7st-a5-gLj" firstAttribute="leading" secondItem="xm3-NW-mjd" secondAttribute="leading" id="lkM-eT-jZ5"/>
-                            <constraint firstItem="7st-a5-gLj" firstAttribute="top" secondItem="IzA-x0-Ehb" secondAttribute="bottom" constant="20" id="y7T-lN-tce"/>
+                            <constraint firstItem="bVO-H1-5Ws" firstAttribute="top" secondItem="IzA-x0-Ehb" secondAttribute="bottom" constant="27" id="nyZ-eB-u4I"/>
                         </constraints>
                     </view>
                     <connections>
@@ -154,4 +166,7 @@
             <point key="canvasLocation" x="1860" y="778"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="map" width="32" height="32"/>
+    </resources>
 </document>
